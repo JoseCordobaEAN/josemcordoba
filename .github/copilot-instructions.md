@@ -6,6 +6,10 @@ Purpose
 
 - Quickly orient agents to the app's architecture, workflows, and conventions so generated changes are correct and idiomatic.
 
+Skills
+
+- You may use skills from the `.github/skills/` folder (such as `issue_creation.md`) to enhance Copilot agent capabilities. Refer to these files for reusable workflows, templates, or automation steps as needed.
+
 Big picture
 
 - Frontend SPA built with Vue 3 + Vite + TypeScript. Entrypoint: [src/main.ts](src/main.ts#L1).
@@ -44,15 +48,25 @@ Integration points & external tools
 
 - `vite-plugin-vue-devtools` is enabled for easier debugging during development (see `vite.config.ts`).
 - Tailwind CSS v4 configured; content globs are in [tailwind.config.js](tailwind.config.js#L1).
+  - **Important:** Tailwind v4 uses `@import "tailwindcss"` instead of the old `@tailwind` directives.
+  - **Do NOT use** `@apply` directive in CSS files (not supported in v4 the same way).
+  - Use Tailwind utility classes directly in templates for styling.
+  - After Tailwind config changes, restart the dev server to see changes.
 - Vitest for unit tests; see [vitest.config.ts](vitest.config.ts#L1) for customizations.
 - Prettier and ESLint (with `@vue/eslint-config-typescript`) are used for formatting and linting. Use provided npm scripts.
+
+Repository naming consideration
+
+- For all MCP or GitHub-related actions, the repository is located at `JoseCordobaEAN/josemcordoba` on GitHub. Use this owner/repo name when creating issues, pull requests, or other GitHub operations.
 
 Guidelines for code-gen and patches
 
 - Keep changes small and focused; run `npm run test:unit` and `npm run type-check` locally to validate.
 - When adding imports prefer the alias form: `import Foo from '@/components/Foo.vue'`.
 - When adding routes edit [src/router/index.ts](src/router/index.ts#L1) and add components under `src/`.
-- For UI changes ensure Tailwind classes are used (project uses Tailwind utility-first styles).
+- For UI changes ensure Tailwind utility classes are used directly in templates (project uses Tailwind v4 utility-first styles).
+- Always consider the site's purpose (personal portfolio for Jose Manuel Córdoba C) when implementing features.
+- Use semantic HTML5 elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`) with proper ARIA labels for accessibility.
 
 Examples
 
